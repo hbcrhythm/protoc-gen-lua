@@ -7,56 +7,18 @@ Google's Protocol Buffers project, ported to Lua
 
 There are various implementations of Protocol Buffers and this is for Lua.
 
-## Install
+## Install for Windows
 
-Install python runtime and the protobuf 2.3 for python.
+Install python runtime and add python to environment of system.
 
-checkout the code.
+Checkout out https://github.com/google/protobuf.git.
 
-Compile the C code:
+Copy protoc.exe to src directory of source code of protobuf.
 
-`$cd protobuf  && make`
+Run "python setup.py install" in src directory of source code of protobuf.
 
-Make a link to protoc-gen-lua  in your $PATH:
+Run Make.bat of protos directory to generate lua file.
 
-`$cd /usr/local/bin && sudo ln -s /path/to/protoc-gen-lua/plugin/protoc-gen-lua`
+lua file be generate in proto_luas.
 
-Then you can compile the .proto like this:
-
-`protoc --lua_out=./ foo.proto`
-
-
-## Quick Example
-You write a .proto file like this:
-
-person.proto :
-```
-  message Person {
-    required int32 id = 1;
-    required string name = 2;
-    optional string email = 3;
-  }
-```
-
-Then you compile it.
-
-Then,  make sure that protobuf/ in package.cpath and package.path,  you use that code like this:
-
-```
-require "person_pb"
-
--- Serialize Example
-local msg = person_pb.Person()
-msg.id = 100
-msg.name = "foo"
-msg.email = "bar"
-local pb_data = msg:SerializeToString()
-
--- Parse Example
-local msg = person_pb.Person()
-msg:ParseFromString(pb_data)
-print(msg.id, msg.name, msg.email)
-```
-
-The API of this library is similar the protobuf library for python.
-For a more complete example,  read the [python documentation](http://code.google.com/apis/protocolbuffers/docs/pythontutorial.html).
+protobuf source file in proto_sources.
